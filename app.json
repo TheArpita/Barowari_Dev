@@ -4,11 +4,12 @@
     "slug": "BarowariApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/web/group_88.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "image": "./assets/web/component_134_1.png",
+       "resizeMode": "contain",
+       "scaleType": "centerInside",
       "backgroundColor": "#ffffff"
     },
     "assetBundlePatterns": [
@@ -19,12 +20,11 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      
     }
   }
 }
