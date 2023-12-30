@@ -9,12 +9,12 @@ const ChequeScreen = () => {
     const navigation = useNavigation();
     
     useLayoutEffect(()=>{
-        navigation.setOptions({headerShown: false})
+        // navigation.setOptions({headerShown: false})
     }, []);
 
     return(
-        <SafeAreaView>
-            <StatusBar>
+        // <SafeAreaView>
+        //     <StatusBar>
                 <View>
                     <Text>Chequebook page</Text>
                     <TouchableOpacity>
@@ -22,8 +22,8 @@ const ChequeScreen = () => {
                         
                     </TouchableOpacity>
                 </View>
-            </StatusBar>
-        </SafeAreaView>
+            // </StatusBar>
+        //</SafeAreaView> 
     )
 };
 

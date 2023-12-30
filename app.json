@@ -8,8 +8,8 @@
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/web/component_134_1.png",
-       "resizeMode": "contain",
-       "scaleType": "centerInside",
+      "resizeMode": "contain",
+      "scaleType": "centerInside",
       "backgroundColor": "#ffffff"
     },
     "assetBundlePatterns": [
@@ -19,12 +19,19 @@
       "supportsTablet": true
     },
     "android": {
-      "adaptiveIcon": {
-        
-      }
+      "package": "com.barowari.BarowariApp",
+      "versionCode": 1,
+      "adaptiveIcon": {},
+      "permissions": [
+        "android.permission.RECEIVE_SMS",
+        "android.permission.READ_SMS"
+      ]
     },
-    "web": {
-      
+    "web": {},
+    "extra": {
+      "eas": {
+        "projectId": "7a583b5c-e1d1-4ab0-ae2c-7526b1723136"
+      }
     }
   }
 }

@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Platform} from 'react-native';
@@ -21,10 +23,17 @@ if (Platform.OS !== 'web') setupURLPolyfill();
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [token, setToken] = useState(null);
+
+  async () => {
+    const token = await AsyncStorage.getItem('currentUser');
+    setToken(token);
+  }
+
   return (
     <NavigationContainer>
       <Provider store={store}>
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName={token?.isLoggedin ? 'tabview' : 'intro'}>
           <Stack.Screen name='intro' component={introduction}></Stack.Screen>
           <Stack.Screen name='login' component={LoginScreen}></Stack.Screen>
           <Stack.Screen name='otp' component={OTPScreen}></Stack.Screen>

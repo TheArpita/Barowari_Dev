@@ -26,8 +26,12 @@ export default Login = ({navigation, route}) => {
     fetch("https://barowari.com/beta/Api/registation", requestOptions)
       .then((response) => response.text())
       .then((result) => {
-        async () => await AsyncStorage.setItem('currentUserName', userName);
-        navigation.navigate('cheque');
+        const userDetails = {
+          name: userName,
+          isLoggedin: true
+        }
+        async () => await AsyncStorage.setItem('currentUser', userDetails);
+        navigation.navigate('tabView');
       })
       .catch((error) => console.log("error", error));
   };

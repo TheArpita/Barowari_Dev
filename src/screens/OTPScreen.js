@@ -7,7 +7,9 @@ import {
   StyleSheet,
   Image,
   Linking,
+  PermissionsAndroid
 } from "react-native";
+import SmsListener from 'react-native-android-sms-listener';
 
 export default OTPPage = ({ navigation, route }) => {
   const { phoneNo, otp_api } = route.params;
@@ -33,8 +35,55 @@ export default OTPPage = ({ navigation, route }) => {
     setResendDisabled(true);
   };
 
+  async function requestReadSmsPermission() {
+    try {
+      console.log('sms permission try');
+      let res_read = await PermissionsAndroid.check(
+        PermissionsAndroid.PERMISSIONS.READ_SMS
+      );
+      let res_receive = await PermissionsAndroid.check(
+        PermissionsAndroid.PERMISSIONS.RECEIVE_SMS
+      );
+      console.log('permission checking', res_read, res_receive);
+      await PermissionsAndroid.requestMultiple([
+        PermissionsAndroid.PERMISSIONS.RECEIVE_SMS,
+        PermissionsAndroid.PERMISSIONS.READ_SMS
+      ]
+        // {
+        //   title: "(...)",
+        //   message: "Why you're asking for..."
+        // }
+      );
+      console.log('requestReadSmsPermission');
+    } catch (err) {
+      console.log('sms permission err', err)
+    }
+  }
+
+  useEffect(()=>{
+    requestReadSmsPermission()
+    .then(()=> {
+      let smsListnSubscription = SmsListener.addListener(message => {
+        console.log('message-->>', message)
+        if (message.originatingAddress === 'OTP') {
+          const otpRegex = /(\d{4})/;
+          const extractedOtp = message?.body?.match(otpRegex);
+          if (extractedOtp) {
+            console.log('extracted otp--->', extractedOtp[0])
+            const str_otp = extractedOtp[0].toString().replace(/,/g, '');
+            setOtp(extractedOtp[0]);
+          }
+        }
+      });
+      smsListnSubscription.remove();
+    }).catch((err)=>{
+      console.log('otp extract err', err)
+    })
+    
+    // console.log('otp==>', otp)
+  }, []);
+
   const handleVerify = () => {
-    // Handle the verification logic here
     // var myHeaders = new Headers();
     // myHeaders.append(
     //   "Cookie",

@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-{console.log('tab view page')}
+
 const Header = () => {
   return (
     <View style={styles.header}>
@@ -32,17 +32,32 @@ const Body2 = () => {
 
 const Body3 = () => {
   const menuItems = [
-    { name: 'Item 1', 
-    // icon: require('./item1.png') 
+    { name: 'Profile', 
+    icon: require('./../../assets/web/component_12_4.png')
   },
-    { name: 'Item 2', 
-    // icon: require('./item2.png') 
+    { name: 'Organisation', 
+    icon: require('./../../assets/web/flag.png') 
   },
-    { name: 'Item 3', 
-    // icon: require('./item3.png') 
+    { name: 'Events', 
+    icon: require('./../../assets/web/event_2.png') 
   },
-    { name: 'Item 4', 
-    // icon: require('./item4.png') 
+    { name: 'Chequebook', 
+    icon: require('./../../assets/web/cheque_2.png') 
+  },
+  { name: 'Receipts', 
+    icon: require('./../../assets/web/component_93_1.png') 
+  },
+  { name: 'Invite', 
+    icon: require('./../../assets/web/share.png') 
+  },
+  { name: 'Setting', 
+    icon: require('./../../assets/web/setting.png') 
+  },
+  { name: 'Rate Us', 
+    icon: require('./../../assets/web/group_8383.png') 
+  },
+  { name: 'FAQ', 
+    icon: require('./../../assets/web/path_6562.png') 
   },
   ];
 
@@ -52,7 +67,7 @@ const Body3 = () => {
 
   return (
     <View style={styles.body}>
-      <Text style={styles.menuHeading}>Menu</Text>
+      {/* <Text style={styles.menuHeading}>Menu</Text> */}
       {menuItems.map((item) => (
         <TouchableOpacity key={item.name} style={styles.menuItem} onPress={() => handlePress(item.name)}>
           <Image source={item.icon} style={styles.menuItemIcon} />
@@ -67,17 +82,60 @@ const Tab = createBottomTabNavigator();
 
 export default TabViewPage = () => {
   return (
-    <View style={{flex:1, backgroundColor: 'red'}}>
+    <View style={{flex:1}}>
       <Header/>
     <Tab.Navigator
       tabBarOptions={{
         activeTintColor: 'blue',
         inactiveTintColor: 'gray',
       }}
+      
     >
-      <Tab.Screen name="Tab 1" component={Body1} />
-      <Tab.Screen name="Tab 2" component={Body2} />
-      <Tab.Screen name="Tab 3" component={Body3} />
+      <Tab.Screen 
+        name="Home"
+        component={Body1}
+        options={{
+          title: 'Home page',
+          tabBarIcon: ({focused}) => {
+            return (
+              <Image
+                style={{height: 25, width: 25, tintColor: focused? 'blue' : 'gray'}}
+                source={require('./../../assets/web/home_grey.png')}
+              />
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Chequebook"
+        component={Body2}
+        options={{
+          title: 'My Chequebook',
+          tabBarIcon: ({focused}) => {
+            return (
+              <Image
+                style={{height: 25, width: 25, tintColor: focused? 'blue' : 'gray'}}
+                source={require('./../../assets/web/cheque_2.png')}
+              />
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Menu"
+        component={Body3}
+        options={{
+          title: 'Menu',
+          tabBarIcon: ({focused}) => {
+            return (
+              <Image
+                style={{height: 25, width: 25, tintColor: focused? 'blue' : 'gray'}}
+                source={require('./../../assets/web/group_191.png')}
+              />
+            );
+          },
+        }}
+      />
     </Tab.Navigator></View>
   );
 };
@@ -90,10 +148,11 @@ const styles = StyleSheet.create({
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
+    backgroundColor: 'white'
   },
   logo: {
-    width: 50,
-    height: 50,
+    width: 35,
+    height: 35,
   },
   rightHeader: {
     flexDirection: 'row',
@@ -106,7 +165,7 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     padding: 10,
-    backgroundColor: 'red'
+    backgroundColor: 'white'
   },
   menuHeading: {
     fontSize: 20,
@@ -117,10 +176,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 10,
+    backgroundColor: 'white'
   },
   menuItemIcon: {
-    width: 50,
-    height: 50,
+    width: 30,
+    height: 30
   },
   menuItemText: {
     marginLeft: 10,

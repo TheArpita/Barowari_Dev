@@ -6,8 +6,8 @@ export default Login = ({navigation}) => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [otp_api, setOtp_api] = useState(null);
   const [error, setError] = useState(null);
-  const [otp, setOtp] = useState('');
-  const [otpSent, setOtpSent] = useState(false);
+  // const [otp, setOtp] = useState('');
+  // const [otpSent, setOtpSent] = useState(false);
 
   const handlePhoneNumberChange = (text) => {
     if (text.length === 10) {
@@ -21,8 +21,6 @@ export default Login = ({navigation}) => {
 
   const handleSubmit = () => {
     if (phoneNumber.length === 10) {
-      // Send OTP to the given phone number
-      // Redirect to OTP submission page
 
       // var myHeaders = new Headers();
       // myHeaders.append("Cookie", "ci_session=3796f10c20c7ab4353a051478609441be99f0c58");
@@ -43,6 +41,8 @@ export default Login = ({navigation}) => {
         .then(data => {
           setOtp_api(data?.otp);
           (phoneNumber!=data?.phonenumber) && setPhoneNumber(data.phonenumber || '');
+          // setOtpSent(true);
+          
           navigation.navigate('otp', {phoneNo: phoneNumber, otp_api});
         })
         .catch(error => console.log('error', error));
